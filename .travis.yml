@@ -1,0 +1,23 @@
+language: python
+python:
+    - "3.6"
+
+install:
+    - python -m pip install --upgrade pip
+    - pip install -r requirements.txt
+
+stages:
+    - check
+    - build
+    - test
+    - deploy
+
+jobs:
+    include:
+        - stage: check
+          - name: "Flake8 and Pylint"
+            script:
+              - make lint
+          - name: "Unit Test"
+            script:
+              - make unittest
